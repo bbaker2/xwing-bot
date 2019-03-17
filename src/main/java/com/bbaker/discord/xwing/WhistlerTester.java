@@ -10,6 +10,7 @@ import org.javacord.api.util.logging.FallbackLoggerConfiguration;
 import com.bbaker.discord.xwing.database.DatabaseService;
 import com.bbaker.discord.xwing.database.JdbiService;
 import com.bbaker.discord.xwing.exception.SetupException;
+import com.bbaker.discord.xwing.ffg.FFGReader;
 import com.bbaker.discord.xwing.printer.EmojiServiceImpl;
 import com.bbaker.discord.xwing.roller.DiceRoller;
 
@@ -33,15 +34,20 @@ public class WhistlerTester {
 
         // Start up bot
         String token = args[0];
+
         DiscordApiBuilder dab = new DiscordApiBuilder().setAccountType(AccountType.BOT).setToken(token);
         DiscordApi api = dab.login().join();
         EmojiServiceImpl emojiService = new EmojiServiceImpl();
         emojiService.setApi(api);
 
-        CommandHandler ch = new JavacordHandler(api);
-        ch.setDefaultPrefix("!");
-        ch.registerCommand(new DiceRoller(emojiService));
 
+        CommandHandler ch = new JavacordHandler(api);
+        ch.setDefaultPrefix("?");
+        ch.registerCommand(new DiceRoller(emojiService));
+        ch.registerCommand(new FFGReader());
+
+//        api.getInviteByCode("UaFgJk").thenAccept(a->a.getChannelName());
+        System.out.println(api.createBotInvite());
 
     }
 }

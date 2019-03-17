@@ -44,9 +44,7 @@ public class DiceRoller implements CommandExecutor {
         });
 
         Collections.sort(dice);
-
         List<String> faces = dice.stream().sorted().map(d -> emojies.findEmoji(d)).collect(Collectors.toList());
-
         return String.join(" ", faces);
     }
 
