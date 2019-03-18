@@ -13,6 +13,7 @@ import com.bbaker.discord.xwing.exception.SetupException;
 import com.bbaker.discord.xwing.ffg.FFGReader;
 import com.bbaker.discord.xwing.printer.EmojiServiceImpl;
 import com.bbaker.discord.xwing.roller.DiceRoller;
+import com.bbaker.discord.xwing.wookie.WookieCommand;
 
 import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.JavacordHandler;
@@ -45,6 +46,7 @@ public class WhistlerTester {
         ch.setDefaultPrefix("?");
         ch.registerCommand(new DiceRoller(emojiService));
         ch.registerCommand(new FFGReader());
+        ch.registerCommand(new WookieCommand());
 
 //        api.getInviteByCode("UaFgJk").thenAccept(a->a.getChannelName());
         System.out.println(api.createBotInvite());
