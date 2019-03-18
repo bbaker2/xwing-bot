@@ -43,6 +43,10 @@ public class DiceRoller implements CommandExecutor {
             return true;
         });
 
+        if(dice.size() > 50) {
+            return "Due to a 2000 character limit, this bot only supports up to 50 die";
+        }
+
         Collections.sort(dice);
         List<String> faces = dice.stream().sorted().map(d -> emojies.findEmoji(d)).collect(Collectors.toList());
         return String.join(" ", faces);
